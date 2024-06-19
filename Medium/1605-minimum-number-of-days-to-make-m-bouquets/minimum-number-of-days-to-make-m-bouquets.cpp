@@ -27,9 +27,15 @@ public:
         if((long long)m*k > n){
             return -1;
         }
+
+        int mini = INT_MAX, maxi = INT_MIN;
+        for(int i = 0;i<n;i++){
+            mini = min(mini, bloomDay[i]);
+            maxi = max(maxi, bloomDay[i]);
+        }
         
 
-        int low = 0, high = 1e9;
+        int low = mini, high = maxi;
         while(low<high){
             int mid = low + (high-low) / 2;
 
