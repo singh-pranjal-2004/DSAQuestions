@@ -28,14 +28,14 @@ public:
             return -1;
         }
 
-        int mini = INT_MAX, maxi = INT_MIN;
-        for(int i = 0;i<n;i++){
-            mini = min(mini, bloomDay[i]);
-            maxi = max(maxi, bloomDay[i]);
-        }
+        // int mini = INT_MAX, maxi = INT_MIN;
+        // for(int i = 0;i<n;i++){
+        //     mini = min(mini, bloomDay[i]);
+        //     maxi = max(maxi, bloomDay[i]);
+        // }
         
 
-        int low = mini, high = maxi;
+        int low = 0, high = 1e9;
         while(low<high){
             int mid = low + (high-low) / 2;
 
