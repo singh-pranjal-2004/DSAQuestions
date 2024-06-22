@@ -7,10 +7,10 @@ public:
 
         image[sr][sc] = color;
 
-        fill(image, sr+1, sc, color, val);
-        fill(image, sr-1, sc, color, val);
-        fill(image, sr, sc-1, color, val);
-        fill(image, sr, sc+1, color, val);
+        fill(image, sr+1, sc, color, val); // down
+        fill(image, sr-1, sc, color, val); // up
+        fill(image, sr, sc-1, color, val); // left
+        fill(image, sr, sc+1, color, val); //right
     }
 
     vector<vector<int>> floodFill(vector<vector<int>>& image, int sr, int sc, int color) {
