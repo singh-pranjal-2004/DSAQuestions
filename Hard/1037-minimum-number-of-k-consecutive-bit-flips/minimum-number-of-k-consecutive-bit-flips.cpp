@@ -2,10 +2,9 @@ class Solution {
 public:
     int minKBitFlips(vector<int>& nums, int k) {
         int flips = 0, count = 0, n = nums.size();
-        vector<bool> isFlipped(n, false);
 
         for(int i = 0;i<n;i++){
-            if(i>=k && isFlipped[i-k]==true){
+            if(i>=k && nums[i-k]==5){
                 count--;
             }
 
@@ -13,7 +12,7 @@ public:
                 if(i+k>n) return -1;
                 count++;
                 flips++;
-                isFlipped[i] = true;
+                nums[i] = 5;
             }
         }
         return flips;
