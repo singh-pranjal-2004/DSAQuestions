@@ -10,38 +10,24 @@
  * };
  */
 class Solution {
-public:
-    void storer(vector<TreeNode*>& vect, TreeNode* root){
-        if(!root) return;
-
-        storer(vect, root->left);
-        vect.push_back(root);
-        storer(vect, root->right);
+    vector<TreeNode*>inOrder;
+    void inOrderTree(TreeNode* root){
+        if(!root)return;
+        inOrderTree(root->left);
+        inOrder.push_back(root);
+        inOrderTree(root->right);
     }
-
-    TreeNode* solver(vector<TreeNode*> vect, int start, int end){
-        if(start > end) return NULL;
-
-        int mid = (end - start)/2+start;
-
-        TreeNode* root = vect[mid];
-        root->left = solver(vect, start, mid-1);
-        root->right = solver(vect, mid+1, end);
-
+    TreeNode* balanced(int start,int end){
+        if(start>end)return NULL;
+        int mid=(start+end)/2;
+        TreeNode* root=inOrder[mid];
+        root->left=balanced(start,mid-1);
+        root->right=balanced(mid+1,end);
         return root;
     }
+public:
     TreeNode* balanceBST(TreeNode* root) {
-        vector<TreeNode*> vect;
-        storer(vect, root);
-        return solver(vect, 0, vect.size()-1);
+        inOrderTree(root);
+        return balanced(0,inOrder.size()-1);
     }
 };
-
-// auto init = []() {
-//     ios::sync_with_stdio(false);
-//     cin.tie(nullptr);
-//     cout.tie(nullptr);
-//     return 'c';
-// }();
-
-
