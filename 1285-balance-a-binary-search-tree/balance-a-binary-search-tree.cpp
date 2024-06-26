@@ -19,7 +19,7 @@ public:
         storer(vect, root->right);
     }
 
-    TreeNode* solver(vector<TreeNode*> vect, int start, int end){
+    TreeNode* solver(vector<TreeNode*>& vect, int start, int end){
         if(start > end) return NULL;
 
         int mid = start + (end - start)/2;
@@ -33,7 +33,8 @@ public:
     TreeNode* balanceBST(TreeNode* root) {
         vector<TreeNode*> vect;
         storer(vect, root);
-        return solver(vect, 0, vect.size()-1);
+        int start = 0, end = vect.size()-1;
+        return solver(vect, start, end);
     }
 };
 
