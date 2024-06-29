@@ -1,10 +1,11 @@
 class Solution {
 public:
-    void DFS(int ancestor, unordered_map<int, vector<int>>& adj, int current, vector<vector<int>>& result){
-        for(int& ngbr: adj[current]){
-            if(result[ngbr].empty() || result[ngbr].back() != ancestor){
-                result[ngbr].push_back(ancestor);
-                DFS(ancestor, adj, ngbr, result);
+    void DFS(int u, unordered_map<int, vector<int>>& adj, vector<bool>& visited){
+        visited[u] = true;
+
+        for(int &v: adj[u]){
+            if(visited[v] != true){
+                DFS(v, adj, visited);
             }
         }
     }
@@ -17,12 +18,23 @@ public:
             int u = vec[0];
             int v = vec[1];
 
-            adj[u].push_back(v);
+            adj[v].push_back(u);
         }
 
-        for(int i = 0;i<n;i++){
-            int ancestor = i;
-            DFS(ancestor, adj, i, result);
+        for(int u = 0;u<n;u++){
+            vector<int> ancestors;
+            vector<bool> visited(n, false);
+
+            DFS(u, adj, visited);
+
+            for(int i = 0;i<n;i++){
+                if(i==u) continue;
+                if(visited[i]==true){
+                    ancestors.push_back(i);
+                }
+            }
+
+            result[u] = ancestors;
         }
 
         return result;
