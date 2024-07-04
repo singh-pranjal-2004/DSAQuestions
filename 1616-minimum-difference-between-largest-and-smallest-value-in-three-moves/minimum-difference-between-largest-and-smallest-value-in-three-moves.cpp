@@ -7,7 +7,11 @@ public:
             return 0;
         }
 
-        sort(nums.begin(), nums.end());
+        partial_sort(begin(nums), begin(nums)+4, end(nums)); // O(n*log(4)) -> O(n)
+
+        nth_element(begin(nums) + 4, begin(nums) + (n-4), end(nums)); // O(n)
+
+        sort(begin(nums)+(n-4), end(nums)); // O(4log(4)) -> O(1)
 
         int ans = INT_MAX;
         for(int i = 0; i < 4; i++){
