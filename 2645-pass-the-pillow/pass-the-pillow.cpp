@@ -1,11 +1,16 @@
 class Solution {
 public:
     int passThePillow(int n, int time) {
-        int ans = 0;
-        for(int i = 0; i <= time; i++){
-            ans++;
-            if(ans==-1 || ans == n) ans*=-1;
+        int person = 1, direction = 1;
+        while(time--){
+            if(direction){
+                person++;
+                if(person == n) direction = 0;
+            }else{
+                person--;
+                if(person==1) direction = 1;
+            }
         }
-        return abs(ans);
+        return person;
     }
 };
