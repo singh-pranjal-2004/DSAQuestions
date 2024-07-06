@@ -11,41 +11,34 @@
 class Solution {
 public:
     vector<int> nodesBetweenCriticalPoints(ListNode* head) {
-        vector<int> ans;
-        vector<int> answer;
+        ListNode* prev = head;
+        ListNode* curr = head->next;
+        int i = 1;
+        int prevCriticalPos = 0;
+        int firstCriticalPos = 0;
 
-        if(!head->next || !head->next->next){
-            return {-1, -1};
-        }
+        int minDist = INT_MAX;
 
-        ListNode* mid = head->next;
-        ListNode* end = head->next->next;
-        int i = 2;
-        while(end!=NULL){
-            if(mid->val < head->val && mid->val < end->val) ans.push_back(i);
-            else if(mid->val > head->val && mid->val > end->val) ans.push_back(i);
-
-            head = head->next;
-            mid = mid->next;
-            end = end->next;
-            i++;
-        }
-
-        int n = ans.size()-1;
-        if(n>=1){
-            // answer.push_back(ans[n]-ans[n-1]);
-            // answer.push_back(ans[n]-ans[0]);
-            int mini = ans[n] - ans[n-1];
-            // int maxi = ans[n]-ans[0];
-            for(int i = n-1; i > 0; i--){
-                mini = min(mini, ans[i]-ans[i-1]);
+        while(curr->next!=NULL){
+            if(curr->val < prev->val && curr->val < curr->next->val ||
+            curr->val > prev->val && curr->val > curr->next->val){
+                if(prevCriticalPos == 0){
+                    firstCriticalPos = i;
+                    prevCriticalPos = i;
+                }else{
+                    minDist = min(minDist, i-prevCriticalPos);
+                    prevCriticalPos = i;
+                }
             }
-            answer.push_back(mini);
-            answer.push_back(ans[n]-ans[0]);
-        }else{
+            i++;
+            prev = curr;
+            curr = curr->next;
+        }
+
+        if(minDist == INT_MAX){
             return {-1, -1};
         }
-        
-        return answer;
+
+        return {minDist, prevCriticalPos-firstCriticalPos};
     }
 };
