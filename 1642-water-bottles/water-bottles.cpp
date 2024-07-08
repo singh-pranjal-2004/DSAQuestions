@@ -2,16 +2,13 @@ class Solution {
 public:
     int numWaterBottles(int numBottles, int numExchange) {
         int drinked = numBottles;
-        int q;
-        int r;
 
         while(numBottles >= numExchange){
-            q = numBottles / numExchange;
-            r = numBottles % numExchange;
+            int q = numBottles / numExchange;
+            int r = numBottles % numExchange;
             drinked += q;
             numBottles /= numExchange;
             numBottles += r;
-            r = 0;
         }
 
         return drinked;
