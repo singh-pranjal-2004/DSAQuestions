@@ -4,11 +4,9 @@ public:
         // next_permutation(nums.begin(), nums.end()); // STL for next_permutation
 
         int n = nums.size();
-        int index = -1, mini = nums[n-1], miniIndex = n-1;
+        int index = -1;
         for(index = n-2; index >= 0; index--){
-            if(nums[index] < nums[index+1]){
-                break;
-            }
+            if(nums[index] < nums[index+1]) break;
         }
 
         if(index == -1){
