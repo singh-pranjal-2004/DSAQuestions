@@ -11,8 +11,6 @@ public:
             }
         }
 
-        cout<<index;
-
         if(index == -1){
             reverse(nums.begin(), nums.end());
             return;
@@ -28,3 +26,10 @@ public:
         reverse(nums.begin()+index+1, nums.end());
     }
 };
+
+auto init = []() {
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+    cout.tie(nullptr);
+    return 'c';
+}();
