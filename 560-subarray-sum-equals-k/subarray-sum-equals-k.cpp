@@ -10,9 +10,7 @@ public:
             sum += nums[i];
 
             int rem = sum - k;
-            if(mp.find(rem) != mp.end()){
-                count += mp[rem];
-            }
+            count += mp[rem];
 
             mp[sum]++;
         }
