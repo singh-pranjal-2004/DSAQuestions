@@ -6,13 +6,14 @@ public:
         int n = customers.size();
 
         total += customers[0][0];
-        for(int i = 0; i < n; i++){
-            if(total < customers[i][0]){
-                total = customers[i][0];
-            }
-            total += customers[i][1];
 
-            ans = ans + (total - customers[i][0]);
+        for(auto v: customers){
+            int arrivalTime = v[0], cookingTime = v[1];
+            if(total < arrivalTime) total = arrivalTime;
+
+            total += cookingTime;
+
+            ans = ans + (total - arrivalTime);
         }
 
         return ans/n;
