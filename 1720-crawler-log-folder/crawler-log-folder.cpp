@@ -1,14 +1,14 @@
 class Solution {
 public:
     int minOperations(vector<string>& logs) {
-        int c = 0;
+        int depth = 0;
         for(auto str: logs){
-            if(str=="../") (c>0)?c--:c=0;
+            if(str=="../") depth = max(0, depth - 1);
             else if(str=="./") continue;
-            else c++;
+            else depth++;
         }
 
-        return (c>=0)? c : 0;
+        return depth;
     }
 };
 
