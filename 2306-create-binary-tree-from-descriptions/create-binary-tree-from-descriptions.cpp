@@ -15,7 +15,7 @@ public:
         unordered_map<int, TreeNode*>mp;
         unordered_set<int> childSet;
 
-        for(auto desc : descriptions){
+        for(auto& desc : descriptions){
             int parent = desc[0];
             int child = desc[1];
             int isLeft = desc[2];
@@ -39,7 +39,7 @@ public:
             }
         }
 
-        for(auto m: mp){
+        for(auto& m: mp){
             if(childSet.find(m.first) == childSet.end()) return m.second;
         }
 
