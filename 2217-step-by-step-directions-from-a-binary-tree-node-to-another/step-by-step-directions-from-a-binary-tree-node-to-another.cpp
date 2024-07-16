@@ -11,20 +11,6 @@
  */
 class Solution {
 private:
-    TreeNode* LCA(TreeNode* root, int p, int q){
-        if(root == NULL) return NULL;
-
-        if(root -> val == p || root -> val == q) return root;
-
-        TreeNode* left = LCA(root->left, p, q);
-        TreeNode* right = LCA(root->right, p, q);
-
-        if(left == NULL && right == NULL) return NULL;
-        else if(left == NULL && right != NULL) return right;
-        else if(left != NULL && right == NULL) return left;
-        else return root;
-    }
-
     bool route(TreeNode* root, int value, string& str){
         if(root == NULL) return false;
 
@@ -48,8 +34,6 @@ private:
     }
 public:
     string getDirections(TreeNode* root, int startValue, int destValue) {
-        // TreeNode* lca = LCA(root, startValue, destValue);
-
         string leftStr = "", rightStr = "";
         route(root, startValue, leftStr);
         route(root, destValue, rightStr);
@@ -67,7 +51,7 @@ public:
         for(int i = index; i < rightStr.length(); i++){
             result.push_back(rightStr[i]);
         }
-        
+
         return result;
 
     }
