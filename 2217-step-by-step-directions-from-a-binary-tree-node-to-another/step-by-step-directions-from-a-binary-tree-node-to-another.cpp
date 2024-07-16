@@ -48,18 +48,26 @@ private:
     }
 public:
     string getDirections(TreeNode* root, int startValue, int destValue) {
-        TreeNode* lca = LCA(root, startValue, destValue);
+        // TreeNode* lca = LCA(root, startValue, destValue);
 
         string leftStr = "", rightStr = "";
-        route(lca, startValue, leftStr);
-        route(lca, destValue, rightStr);
+        route(root, startValue, leftStr);
+        route(root, destValue, rightStr);
+
+        int index = 0;
+        while(index < leftStr.length() && index < rightStr.length()){
+            if(leftStr[index] != rightStr[index]) break;
+            index++;
+        }
 
         string result = "";
-        for(auto s: leftStr){
+        for(int i = index; i < leftStr.length(); i++){
             result.push_back('U');
         }
-        result += rightStr;
-
+        for(int i = index; i < rightStr.length(); i++){
+            result.push_back(rightStr[i]);
+        }
+        
         return result;
 
     }
