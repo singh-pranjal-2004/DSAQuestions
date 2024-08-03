@@ -1,22 +1,20 @@
 class Solution {
 public:
     bool canBeEqual(vector<int>& target, vector<int>& arr) {
-        sort(target.begin(), target.end());
-        sort(arr.begin(), arr.end());
+        unordered_map<int, int>mp;
 
-        int n = arr.size();
-
-        for(int i = 0; i < n; i++){
-            if(target[i] != arr[i]) return false;
+        for(auto& i: target){
+            mp[i]++;
         }
 
-        return true;
+        for(auto& i: arr){
+            if(mp.find(i) == mp.end()) return false;
+
+            mp[i]--;
+
+            if(mp[i] == 0) mp.erase(i);
+        }
+
+        return mp.size() == 0;
     }
 };
-
-auto init = []() {
-    ios::sync_with_stdio(false);
-    cin.tie(nullptr);
-    cout.tie(nullptr);
-    return 'c';
-}();
