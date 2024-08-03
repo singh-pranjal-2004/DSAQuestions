@@ -1,49 +1,31 @@
 class Solution {
 public:
     vector<int> luckyNumbers (vector<vector<int>>& matrix) {
-        unordered_map<int, pair<int, int>>mp;
-        vector<int>ans;
+        int m = matrix.size();
+        int n = matrix[0].size();
 
-        for(int i = 0; i < matrix.size(); i++){
-            int minVal = matrix[i][0];
-            int minIndex = 0;
-            for(int j = 1; j < matrix[0].size(); j++){
-                if(matrix[i][j] < minVal){
-                    minVal = matrix[i][j];
-                    minIndex = j;
-                }
+        int maxMinRow = INT_MIN;
+        for(int row = 0; row < m; row++){
+            int minRow = INT_MAX;
+            for(int col = 0; col < n; col++){
+                minRow = min(minRow, matrix[row][col]);
             }
-            mp[minVal] = {i, minIndex};
+
+            maxMinRow = max(maxMinRow, minRow);
         }
 
-        for(int i = 0; i < matrix[0].size(); i++){
-            int maxVal = matrix[0][i];
-            int maxIndex = 0;
-            for(int j = 1; j < matrix.size(); j++){
-                if(matrix[j][i] > maxVal){
-                    maxVal = matrix[j][i];
-                    maxIndex = j;
-                }
+        int minMaxCol = INT_MAX;
+        for(int col = 0; col < n; col++){
+            int maxCol = INT_MIN;
+            for(int row = 0; row < m; row++){
+                maxCol = max(maxCol, matrix[row][col]);
             }
 
-            if(mp.find(maxVal) != mp.end()){
-                int a = mp[maxVal].first;
-                int b = mp[maxVal].second;
-
-                if(a == maxIndex && b == i){
-                    ans.push_back(maxVal);
-                }
-            }
-
+            minMaxCol = min(minMaxCol, maxCol);
         }
 
-        return ans;
+        if(minMaxCol == maxMinRow) return {minMaxCol};
+
+        return {};
     }
 };
-
-auto init = []() {
-    ios::sync_with_stdio(false);
-    cin.tie(nullptr);
-    cout.tie(nullptr);
-    return 'c';
-}();
