@@ -1,33 +1,37 @@
 class Solution {
 public:
+    typedef pair<int, int> P;
+    int m = 1e9 + 7;
     int rangeSum(vector<int>& nums, int n, int left, int right) {
-        priority_queue<int, vector<int>, greater<int>>pq;
+        priority_queue<P, vector<P>, greater<P>> pq;
 
         for(int i = 0; i < n; i++){
-            int sum = 0;
-            for(int j = i; j < n; j++){
-                sum += nums[j];
-                pq.push(sum);
-            }
+            pq.push({nums[i], i});
         }
 
-        int ans = 0;
-        const int mod = 1e9 + 7;
-        int s = pq.size();
-        for(int i = 1; i <= s ; i++){
-            if(i > right) break;
-            if(i >= left && i <= right) ans = (ans + pq.top()) % mod;
+        int result = 0;
 
-            pq.pop();
+        for(int count = 1; count <= right; count++){
+            auto p = pq.top();
+        pq.pop();
+
+        int sum = p.first;
+        int idx = p.second;
+
+        if(count >= left){
+            result = (result + sum) % m;
         }
 
-        return ans;
+        int newIdx = idx + 1;
+        P new_pair;
+        if(newIdx < n){
+            new_pair.first = sum + nums[newIdx];
+            new_pair.second = newIdx;
+            pq.push(new_pair);
+        }
+        }
+        
+        return result;
     }
-};
 
-auto init = []() {
-    ios::sync_with_stdio(false);
-    cin.tie(nullptr);
-    cout.tie(nullptr);
-    return 'c';
-}();
+};
