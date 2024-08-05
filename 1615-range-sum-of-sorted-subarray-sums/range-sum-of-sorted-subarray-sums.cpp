@@ -1,22 +1,24 @@
 class Solution {
 public:
     int rangeSum(vector<int>& nums, int n, int left, int right) {
-        vector<int>subarr;
+        priority_queue<int, vector<int>, greater<int>>pq;
+
         for(int i = 0; i < n; i++){
             int sum = 0;
             for(int j = i; j < n; j++){
                 sum += nums[j];
-                subarr.push_back(sum);
+                pq.push(sum);
             }
         }
 
-        sort(begin(subarr), end(subarr));
-
         int ans = 0;
         const int mod = 1e9 + 7;
-        while(left<=right){
-            ans = (ans + subarr[left-1]) % mod;
-            left++;
+        int s = pq.size();
+        for(int i = 1; i <= s ; i++){
+            if(i > right) break;
+            if(i >= left && i <= right) ans = (ans + pq.top()) % mod;
+
+            pq.pop();
         }
 
         return ans;
