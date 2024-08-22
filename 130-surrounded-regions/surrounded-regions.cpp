@@ -17,7 +17,6 @@ public:
     void solve(vector<vector<char>>& board) { 
         int tRows = board.size();
         int tCols = board[0].size();
-        queue<pair<int, int>>q;
         vector<vector<int>>vis(tRows, vector<int>(tCols, 0));
         int delRow[4] = {-1, 0, 1, 0};
         int delCol[4] = {0, -1, 0, 1};
