@@ -11,11 +11,11 @@ public:
             q.pop();
 
             for(auto i: graph[node]){
-                if(vis[i] != -1 && vis[node] == vis[i]) return false;
-
-                if(vis[i] != -1) continue;
-                vis[i] = !vis[node];
-                q.push(i);
+                if(vis[i] == -1){
+                    vis[i] = !vis[node];
+                    q.push(i);
+                }
+                else if(vis[i] != -1 && vis[node] == vis[i]) return false;            
             }
         }
 
