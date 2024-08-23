@@ -33,11 +33,15 @@ public:
             ntr += n;
             dtr = dtr * d;
 
-            int gd = gcd(abs(ntr), dtr);
-            ntr /= gd;
-            dtr /= gd;
+            // int gd = gcd(abs(ntr), dtr);
+            // ntr /= gd;
+            // dtr /= gd;
             
         }
+
+        int gd = gcd(abs(ntr), dtr);
+        ntr /= gd;
+        dtr /= gd;
 
         return to_string(ntr) + "/" + to_string(dtr);
     }
