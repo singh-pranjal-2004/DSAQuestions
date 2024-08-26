@@ -20,19 +20,22 @@ public:
 
 class Solution {
 public:
-    void postOrderTraversal(Node* root, vector<int>& ans){
-        if(!root) return;
+    vector<int> postorder(Node* root) {
+        if(!root) return {};
+        vector<int> ans;
+        stack<Node*> st;
 
-        for(auto i: root->children){
-            postOrderTraversal(i, ans);
+        st.push(root);
+        while(!st.empty()){
+            Node* top = st.top();
+            st.pop();
+            ans.push_back(top->val);
+            for(auto i: top->children){
+                st.push(i);
+            }
         }
 
-        ans.push_back(root->val);
-    }
-
-    vector<int> postorder(Node* root) {
-        vector<int> ans;
-        postOrderTraversal(root, ans);
+        reverse(ans.begin(), ans.end());
 
         return ans;
     }
