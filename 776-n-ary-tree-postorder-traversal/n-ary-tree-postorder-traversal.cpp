@@ -21,7 +21,7 @@ public:
 class Solution {
 public:
     void postOrderTraversal(Node* root, vector<int>& ans){
-        if(root == NULL) return;
+        if(!root) return;
 
         for(auto i: root->children){
             postOrderTraversal(i, ans);
