@@ -1,33 +1,24 @@
 class Solution {
 public:
-    bool check(int start, vector<vector<int>>& graph, vector<int>& vis){
-        queue<int>q;
+    bool dfs(int start, vector<vector<int>>& graph, vector<int>& vis, int col){
+        vis[start] = !col;
 
-        vis[start] = 0;
-        q.push(start);
-
-        while(!q.empty()){
-            int node = q.front();
-            q.pop();
-
-            for(auto i: graph[node]){
-                if(vis[i] == -1){
-                    vis[i] = !vis[node];
-                    q.push(i);
-                }
-                else if(vis[i] != -1 && vis[node] == vis[i]) return false;            
-            }
+        for(auto i: graph[start]){
+            if(vis[i] == -1){
+                if(dfs(i, graph, vis, !col) == false) return false;
+            }else if(vis[i] != -1 && vis[i] == vis[start]) return false;
         }
 
         return true;
     }
+    
     bool isBipartite(vector<vector<int>>& graph) {
         int n = graph.size();
         vector<int>vis(n, -1);
         
         for(int i = 0; i < n; i++){
             if(vis[i] == -1){
-                if(check(i, graph, vis) == false) return false;
+                if(dfs(i, graph, vis, 0) == false) return false;
             }
         }
 
