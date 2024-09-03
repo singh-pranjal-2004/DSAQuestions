@@ -8,7 +8,7 @@ public:
         }
  
         while(k>0){
-            long long num = 0;            
+            int num = 0;            
             for(char c: str){
                 num += (c - '0');
             }
@@ -17,7 +17,7 @@ public:
             k--;
         }
 
-        return stoll(str);
+        return stoi(str);
     }
 };
 
