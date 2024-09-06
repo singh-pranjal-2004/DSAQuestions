@@ -24,8 +24,9 @@ public:
 
         while(curr){
             if(st.find(curr->val) != st.end()){
-                prev->next = curr->next;  
-                curr = curr->next;              
+                prev->next = curr->next;
+                curr->next = NULL;  
+                curr = prev->next;              
             }else{
                 curr = curr -> next;
                 prev = prev -> next;
