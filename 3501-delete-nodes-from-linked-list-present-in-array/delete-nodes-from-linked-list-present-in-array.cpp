@@ -11,21 +11,17 @@
 class Solution {
 public:
     ListNode* modifiedList(vector<int>& nums, ListNode* head) {
-        unordered_set<int>st;
-        for(auto i: nums){
-            st.insert(i);
-        }
+        unordered_set<int>st(nums.begin(), nums.end());
 
         ListNode* dummy = new ListNode();
         dummy->next = head;
         ListNode* prev = dummy;
-        prev->next = head;
-        ListNode* curr = dummy->next;
+        ListNode* curr = head;
 
         while(curr){
             if(st.find(curr->val) != st.end()){
                 prev->next = curr->next;
-                curr->next = NULL;  
+                delete curr;  
                 curr = prev->next;              
             }else{
                 curr = curr -> next;
