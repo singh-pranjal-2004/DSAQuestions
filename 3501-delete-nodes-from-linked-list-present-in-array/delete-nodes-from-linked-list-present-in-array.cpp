@@ -20,7 +20,7 @@ public:
         dummy->next = head;
         ListNode* prev = dummy;
         prev->next = head;
-        ListNode* curr = head;
+        ListNode* curr = dummy->next;
 
         while(curr){
             if(st.find(curr->val) != st.end()){
