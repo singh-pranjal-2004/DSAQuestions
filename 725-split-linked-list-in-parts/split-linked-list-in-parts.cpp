@@ -11,17 +11,9 @@
 class Solution {
 public:
     int getCount(ListNode* head){
-        // if(head == NULL) return 0;
+        if(head == NULL) return 0;
 
-        // return 1 + getCount(head -> next);
-
-        int count = 0;
-        ListNode* cu  = head;
-        while(cu != NULL){
-            count++;
-            cu = cu -> next;
-        } 
-        return count;  
+        return 1 + getCount(head -> next);
     }
     
     vector<ListNode*> splitListToParts(ListNode* head, int k) {
