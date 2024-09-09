@@ -15,7 +15,7 @@ public:
         int top = 0, bottom = m-1;
         vector<vector<int>>ans(m, vector<int>(n, -1));
         ListNode* curr = head;
-        while(curr!=NULL){
+        while(curr){
             
             // top
             for(int i = left; i <= right && curr; i++){
@@ -23,6 +23,8 @@ public:
                 curr = curr -> next;
             }
             top++;
+
+            if (!curr) break;
             
             // right
             for(int i = top; i <= bottom && curr; i++){
@@ -31,6 +33,8 @@ public:
             }
             right--;
 
+            if (!curr) break;
+
             // bottom
             for(int i = right; i >= left && curr; i--){
                 ans[bottom][i] = curr -> val;
@@ -38,12 +42,16 @@ public:
             }
             bottom--;
 
+            if (!curr) break;
+
             // left
             for(int i = bottom; i >= top && curr; i--){
                 ans[i][left] = curr -> val;
                 curr = curr -> next;
             }
             left++;
+
+            if (!curr) break;
         }
 
         return ans;
