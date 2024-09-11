@@ -5,8 +5,8 @@ public:
         vector<int>inDegree(numCourses, 0);
 
         for(auto i: prerequisites){
-            adj[i[0]].push_back(i[1]);
-            inDegree[i[1]]++;
+            adj[i[1]].push_back(i[0]);
+            inDegree[i[0]]++;
         }
 
         queue<int>q;
