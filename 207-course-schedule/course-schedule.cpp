@@ -2,15 +2,11 @@ class Solution {
 public:
     bool canFinish(int numCourses, vector<vector<int>>& prerequisites) {
         vector<int> adj[numCourses];
+        vector<int>inDegree(numCourses, 0);
+
         for(auto i: prerequisites){
             adj[i[0]].push_back(i[1]);
-        }
-
-        vector<int>inDegree(numCourses, 0);
-        for(int i = 0; i < numCourses; i++){
-            for(auto adjacent: adj[i]){
-                inDegree[adjacent]++;
-            }
+            inDegree[i[1]]++;
         }
 
         queue<int>q;
