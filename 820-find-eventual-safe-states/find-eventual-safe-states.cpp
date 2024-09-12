@@ -1,45 +1,34 @@
 class Solution {
 public:
-    bool dfs(int node, vector<vector<int>>& graph, vector<int>& vis, vector<int>& pathVis, vector<int>& check){
-        vis[node] = 1;
-        pathVis[node] = 1;
-        
-        for(auto adjacent: graph[node]){
-            if(!vis[adjacent]){
-                if(dfs(adjacent, graph, vis, pathVis, check)) return true;
-            }else if(pathVis[adjacent]) return true;
-        }
-        
-        pathVis[node] = 0;
-        check[node] = 1;
-        return false;
-    }
-
     vector<int> eventualSafeNodes(vector<vector<int>>& graph) {
-        int V = graph.size();
-        vector<int>vis(V, 0);
-        vector<int>pathVis(V, 0);
-        vector<int>check(V, 0);
-        
-        for(int i = 0; i < V; i++){
-            if(!vis[i]){
-                dfs(i, graph, vis, pathVis, check);
+        vector<int>adj[graph.size()];
+        vector<int>inDegree(graph.size(), 0);
+        for(int i = 0; i < graph.size(); i++){
+            for(auto it: graph[i]){
+                adj[it].push_back(i);
+                inDegree[i]++;
             }
         }
-        
-        vector<int>ans;
-        for(int i = 0; i < V; i++){
-            if(check[i]) ans.push_back(i);
+        queue<int>q;
+        for(int i = 0; i < graph.size(); i++){
+            if(inDegree[i] == 0) q.push(i);
         }
-        
-        return ans;
+
+        vector<int>topo;
+        while(!q.empty()){
+            int node = q.front();
+            q.pop();
+
+            topo.push_back(node);
+
+            for(auto adjacent: adj[node]){
+                inDegree[adjacent]--;
+                if(inDegree[adjacent] == 0) q.push(adjacent);
+            }
+        }
+
+        sort(begin(topo), end(topo));
+
+        return topo;
     }
 };
-
-const static auto fast = []
-{
-    std::ios_base::sync_with_stdio(false);
-    std::cin.tie(nullptr);
-    std::cout.tie(nullptr);
-    return 0;
-}();
