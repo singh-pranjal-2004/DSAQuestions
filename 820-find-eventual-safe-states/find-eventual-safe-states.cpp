@@ -1,5 +1,6 @@
 class Solution {
 public:
+    // Using BFS (Topo Sort)
     vector<int> eventualSafeNodes(vector<vector<int>>& graph) {
         vector<int>adj[graph.size()];
         vector<int>inDegree(graph.size(), 0);
