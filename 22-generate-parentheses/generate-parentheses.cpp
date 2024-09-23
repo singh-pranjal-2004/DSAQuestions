@@ -6,13 +6,13 @@ public:
             return;
         }
 
-        if(open == n){
-            str += ')';
-            solver(ans, str, open, close+1, n);
-            return;
-        }
+        // if(open == n){
+        //     str += ')';
+        //     solver(ans, str, open, close+1, n);
+        //     return;
+        // }
 
-        solver(ans, str + '(', open + 1, close, n);
+        if(open < n) solver(ans, str + '(', open + 1, close, n);
         if(open > close) solver(ans, str + ')', open, close + 1, n);
     }
 
