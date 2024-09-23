@@ -6,6 +6,7 @@ public:
 
         unordered_set<string>st(begin(wordList), end(wordList));
         st.erase(beginWord);
+        if(st.find(endWord)==st.end()) return 0;
 
         while(!q.empty()){
             string word = q.front().first;
