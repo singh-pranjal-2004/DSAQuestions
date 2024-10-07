@@ -9,7 +9,6 @@ public:
         string str;
         char prev = '-';
         while (!st.empty()) {
-            cout<<prev<<" "<<str<<endl;
             char ch = st.top();
 
             if(prev == '-' && (ch == 'B' || ch == 'D')){
