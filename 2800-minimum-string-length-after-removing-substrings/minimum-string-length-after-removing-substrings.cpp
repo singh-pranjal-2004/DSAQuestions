@@ -17,7 +17,7 @@ public:
             }else if(prev != '-'){
                 if((ch == 'A' && prev == 'B') || (ch == 'C' && prev == 'D')){
                     str.erase(0, 1);
-                    if(str.length()>0 && (str[0] == 'D' || str[0] == 'B')) prev = str[0];
+                    if(str[0] == 'D' || str[0] == 'B') prev = str[0];
                     else prev = '-';
                 }else {
                     prev = ch;
