@@ -21,15 +21,17 @@ public:
                 swap(n[i], n[maxRightIdx]);
                 return stoi(n);
             }
-
-
-            // if(maxRight[i] != i){
-            //     swap(n[i], n[maxRight[i]]);
-            //     return stoi(n);
-            // }
         }
 
         return num;
 
     }
 };
+
+const static auto fast = []
+{
+    std::ios_base::sync_with_stdio(false);
+    std::cin.tie(nullptr);
+    std::cout.tie(nullptr);
+    return 0;
+}();
