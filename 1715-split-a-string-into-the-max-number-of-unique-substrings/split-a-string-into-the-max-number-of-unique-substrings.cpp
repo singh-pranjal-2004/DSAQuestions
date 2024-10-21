@@ -1,6 +1,8 @@
 class Solution {
 public:
     void solver(unordered_set<string>& ust, string& s, int idx, int currCount, int &maxCount){
+        if(currCount + (s.length()-idx+1) <= maxCount) return;
+
         if(idx >= s.length()){
             maxCount = max(currCount, maxCount);
             return;
