@@ -1,34 +1,18 @@
 class Solution {
 public:
     bool canBeIncreasing(vector<int>& nums) {
-        for(int i = 0; i < nums.size(); i++){
-            bool check = true;
-            int pre = (i==0) ? 0 : nums[0];
-            
-            for(int j = 1; j < nums.size(); j++){
-                if(j == i){
-                    continue;
-                }
-
-                if(pre >= nums[j]){
-                    check = false;
-                    break;
-                }
-
-                pre = nums[j];
+        int count = 0;
+        int n = nums.size();
+        for(int i = 1; i < nums.size(); i++){
+            if(nums[i-1] >= nums[i]){
+                count++;
             }
 
-            if(check) return true;
+            if(i>1 && nums[i-2] >= nums[i] && i+1 < n && nums[i-1] >= nums[i+1]) return false;
+
+            if(count > 1) return false;
         }
 
-        return false;
+        return true;
     }
 };
-
-const static auto fast = []
-{
-    std::ios_base::sync_with_stdio(false);
-    std::cin.tie(nullptr);
-    std::cout.tie(nullptr);
-    return 0;
-}();
