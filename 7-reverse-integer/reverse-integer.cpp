@@ -1,10 +1,6 @@
 class Solution {
 public:
     int reverse(int x) {
-        bool neg = false;
-
-        if(x < 0) neg = true;
-
         int n = 0;
 
         while(x){
