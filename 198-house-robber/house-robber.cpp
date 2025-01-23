@@ -7,16 +7,15 @@ public:
 
         if(dp[idx] != -1) return dp[idx];
 
-        int take = nums[idx] + solver(nums, dp, idx-2);
-        int notTake = 0 + solver(nums, dp, idx-1);
+        int a = nums[idx] + solver(nums, dp, idx-2);
+        int b = solver(nums, dp, idx-1);
 
-        return dp[idx] = max(take, notTake);
+        return dp[idx] = max(a, b);
     }
 
     int rob(vector<int>& nums) {
         int n = nums.size();
-        vector<int>dp(n, -1);
-
+        vector<int>dp(n+1, -1);
         return solver(nums, dp, n-1);
     }
 };
