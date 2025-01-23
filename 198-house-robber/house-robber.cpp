@@ -1,21 +1,19 @@
 class Solution {
 public:
-    int solver(vector<int>& nums, vector<int>& dp, int idx){
-        if(idx == 0) return nums[0];
-
-        if(idx < 0) return 0;
-
-        if(dp[idx] != -1) return dp[idx];
-
-        int a = nums[idx] + solver(nums, dp, idx-2);
-        int b = solver(nums, dp, idx-1);
-
-        return dp[idx] = max(a, b);
-    }
-
     int rob(vector<int>& nums) {
         int n = nums.size();
-        vector<int>dp(n+1, -1);
-        return solver(nums, dp, n-1);
+        vector<int>dp(n, -1);
+
+        dp[0] = nums[0];
+        int neg = 0;
+
+        for(int i = 1; i < n; i++){
+            int a = nums[i] + (i>=2 ? dp[i-2] : 0);
+            int b = dp[i-1];
+
+            dp[i] = max(a, b);
+        }
+
+        return dp[n-1];
     }
 };
