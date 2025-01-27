@@ -17,10 +17,10 @@ public:
         int m = obstacleGrid.size();
         int n = obstacleGrid[0].size();
 
-        if(m == 1 && n == 1){
-            if(obstacleGrid[0][0]) return 0;
-            return 1;
-        }
+        // if(m == 1 && n == 1){
+        //     if(obstacleGrid[0][0]) return 0;
+        //     return 1;
+        // }
 
         vector<vector<int>>dp(m, vector<int>(n, -1));
         return solver(obstacleGrid, dp, m-1, n-1);
