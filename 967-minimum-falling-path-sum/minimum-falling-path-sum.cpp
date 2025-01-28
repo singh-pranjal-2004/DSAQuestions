@@ -4,7 +4,7 @@ public:
         if(j < 0 || j >= n) return 1e9;
         if(i == n-1) return matrix[i][j];
 
-        if(dp[i][j] != -100000) return dp[i][j];
+        if(dp[i][j] != -1e9) return dp[i][j];
 
         int left = matrix[i][j] + solver(matrix, dp, i+1, j-1, n);
         int right = matrix[i][j] + solver(matrix, dp, i+1, j+1, n);
@@ -17,7 +17,7 @@ public:
     int minFallingPathSum(vector<vector<int>>& matrix) {
         int n = matrix.size();
         int mini = 1e9;
-        vector<vector<int>>dp(101, vector<int>(101, -100000));
+        vector<vector<int>>dp(n, vector<int>(101, -1e9));
 
         for(int i = 0; i < n; i++){
             int ans = solver(matrix, dp, 0, i, n);
