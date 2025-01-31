@@ -20,19 +20,25 @@ public:
             curr = curr -> next;
         }
 
-        c = c - n;
-        if(c < 0) return NULL;
-        if(c == 0) return head->next;
+        if(c == n) {
+            ListNode* newHead = head -> next;
+            delete head;
+            return newHead;
+        }
+
+        int res = c - n;
 
         curr = head;
-        ListNode* prev = NULL;
-        while(c--){
-            prev = curr;
+        while(curr != NULL){
+            res--;
+            if(res == 0) break;
+
             curr = curr -> next;
         }
 
-        prev -> next = curr -> next;
-        delete curr;
+        ListNode* delNode = curr -> next;
+        curr -> next = curr -> next -> next;
+        delete delNode;
 
         return head;
     }
