@@ -1,29 +1,23 @@
 class Solution {
 public:
-    double myPow(double x, int n) {
-        if(n < 0) x = 1 / x;
+    double solver(double x, int n) {
+        if(n == 0) return 1;
+        if(n == 1) return x;
 
-        long nums = labs(n);
+        double half = solver(x, n/2);
 
-        double pow = 1;
-
-        while(nums){
-            if(nums & 1){
-                pow *= x;
+        if(n % 2 == 0) {
+            return half * half;
+        }else {
+            if(n < 0) {
+                return half * half * 1/x;
+            }else{
+                return half * half * x;
             }
-
-            x *= x;
-            nums >>= 1;
         }
+    }
 
-        return pow;
+    double myPow(double x, int n) {
+        return solver(x, n);
     }
 };
-
-const static auto fast = []
-{
-    std::ios_base::sync_with_stdio(false);
-    std::cin.tie(nullptr);
-    std::cout.tie(nullptr);
-    return 0;
-}();
