@@ -1,40 +1,40 @@
 class Solution {
 public:
     vector<int> findOrder(int numCourses, vector<vector<int>>& prerequisites) {
-        vector<int> adj[numCourses];
-        vector<int>inDegree(numCourses, 0);
+        vector<vector<int>>adj(numCourses);
+        vector<int>inDegree(numCourses);
 
-        for(auto i: prerequisites){
-            adj[i[1]].push_back(i[0]);
-            inDegree[i[0]]++;
+        for(auto& vec: prerequisites) {
+            int a = vec[0];
+            int b = vec[1];
+
+            adj[b].push_back(a);
+            inDegree[a]++;
         }
 
+        vector<int> topo;
         queue<int>q;
-        for(int i = 0; i < numCourses; i++){
-            if(inDegree[i] == 0) q.push(i);
-        }
-
-        vector<int>topo;
-        while(!q.empty()){
-            int node = q.front();
-            q.pop();
-            topo.push_back(node);
-
-            for(auto adjacent: adj[node]){
-                inDegree[adjacent]--;
-                if(inDegree[adjacent] == 0) q.push(adjacent);
+        for(int i = 0; i < numCourses; i++) {
+            if(inDegree[i] == 0) {
+                q.push(i);
             }
         }
 
-        return (topo.size()==numCourses)? topo : vector<int>{} ;
+        while(!q.empty()) {
+            int u = q.front();
+            q.pop();
+            topo.push_back(u);
+
+            for(auto& v: adj[u]) {
+                inDegree[v]--;
+                if(inDegree[v] == 0) 
+                    q.push(v);
+            }
+        }
+
+        if(topo.size() == numCourses)
+            return topo;
+
+        return {};
     }
 };
-
-const static auto fast = []
-{
-    std::ios_base::sync_with_stdio(false);
-    std::cin.tie(nullptr);
-    std::cout.tie(nullptr);
-    return 0;
-}();
-
