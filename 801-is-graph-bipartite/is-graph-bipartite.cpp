@@ -1,5 +1,28 @@
 class Solution {
 public:
+    bool checkBipartiteBFS(vector<vector<int>>adj, int curr, vector<int>& color, int currColor) {
+        color[curr] = currColor; //color kardiya curr node ko
+        
+        queue<int> que;
+        que.push(curr);
+        
+        while(!que.empty()) {
+            int u = que.front();
+            que.pop();
+            
+            for(int &v : adj[u]) {
+                if(color[v] == color[u]) {
+                    return false;
+                } else if(color[v] == -1) {
+                    color[v] = 1 - color[u];
+                    que.push(v);
+                }
+            }
+        }
+        
+        return true;
+    }
+
     bool isBipartite(vector<vector<int>>& graph) {
         int n = graph.size();
         vector<vector<int>>adj(n);
@@ -12,31 +35,18 @@ public:
             }
         }
 
-        vector<int>vis(n, -1);
-
-        for(int i = 0; i < n; i++) {
-            if(vis[i] == -1) {
-                queue<pair<int, int>>q;
-                q.push({i, 0});
-                vis[i] = 0;
-
-                while(!q.empty()) {
-                    int v = q.front().first;
-                    int col = q.front().second;
-                    vis[v] = col;
-                    q.pop();
-
-                    for(auto u: adj[v]) {
-                        if(vis[u] == col) return false;
-
-                        if(vis[u] == -1) {
-                            q.push({u, 1-col});
-                        }
-                    }
-                }
-            }
-        }
-
-        return true;
+        vector<int> color(n, -1); //no node colored in the start
+	    
+	    //red = 1
+	    //gree = 0
+	    
+	    for(int i = 0; i<n; i++) {
+	        if(color[i] == -1) {
+	            if(checkBipartiteBFS(adj, i, color, 1) == false)
+	                return false;
+	        }
+	    }
+	    
+	    return true;
     }
 };
