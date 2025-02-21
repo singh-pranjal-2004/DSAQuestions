@@ -37,10 +37,7 @@ public:
     }
     
     bool find(int target) {
-        if(st.find(target) != st.end())
-            return true;
-        
-        return false;
+        return st.find(target) != st.end();
     }
 };
 
