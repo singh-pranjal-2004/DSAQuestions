@@ -1,6 +1,6 @@
 class Solution {
 public:
-    void solver(vector<string>& ans, string num, int target, int i, string temp,
+    void solver(vector<string>& ans, string& num, int& target, int i, string temp,
                 long prev, long curr, bool isFirst) {
         if (i == num.size()) {
             if (curr == target)
