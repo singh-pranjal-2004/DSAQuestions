@@ -15,9 +15,6 @@ public:
             string s = num.substr(i, idx - i + 1);
             long n = stol(s);
 
-            if (n > INT_MAX || n < INT_MIN)
-                continue;
-
             if (i == 0) {
                 solver(ans, num, target, idx + 1, s, n, n, false);
             } else {
